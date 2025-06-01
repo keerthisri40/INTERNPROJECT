@@ -1,0 +1,17 @@
+.{
+    text-align: center;
+    margin-top: 75px;
+    font-size:50px;
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+button {
+    background-color:lightcoral;
+    font-size: 30px;
+    box-shadow:0px 0px 5px ;
+    border-radius:50px;
+}
+#rock 
+{
+    background-color:rgb(165, 42, 42);
+}
