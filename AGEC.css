@@ -1,0 +1,20 @@
+#d{
+    text-align: center;
+}
+#in{
+    margin-bottom: 20px;
+    height:20px;
+    width:120px;
+}
+h1{
+    margin-top:100px;
+    color:darkgreen;
+    font-family: cursive;
+}
+#btn{
+    color:white;
+    background-color: darkgreen;
+}
+#p1{
+    color:darkgreen;
+}
