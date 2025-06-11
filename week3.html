@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive User Registration Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    body {
+  background: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 30px 20px;
+  color: darkslategray;
+}
+
+h2 {
+  max-width: 400px;
+  margin: 0 auto 20px;
+  text-align: center;
+  color: white;
+}
+
+form {
+  max-width: 420px;
+  margin: auto;
+  background: darkgray;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.box {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: black;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-size: 14px;
+  background: lavender;
+  color: black;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgb(101, 87, 179);
+  box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.3);
+}
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+  border-color: black;
+  box-shadow: 0 0 0 2px rgba(135, 206, 250, 0.3);
+}
+
+.name-row {
+  display: flex;
+  gap: 10px;
+}
+
+.name-row input {
+  flex: 1;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 35px;
+  transform: translateY(-2%);
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.register {
+  background:teal;
+  color: white;
+}
+
+.register:hover {
+  background:darkslategray;
+}
+
+.reset {
+  background: grey;
+  color: black;
+  border: 1px solid gray;
+}
+
+.reset:hover {
+  background: silver;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+
+<form id="form">
+  <div class="box">
+    <label>Full Name</label>
+    <div class="name-row">
+      <input id="fname" type="text" placeholder="First Name">
+      <input id="lname" type="text" placeholder="Last Name">
+    </div>
+  </div>
+<br>
+  <div class="box">
+    <label>Email</label>
+    <input id="email" type="email" placeholder="you@example.com">
+  </div>
+<br>
+  <div class="box">
+    <label>Password</label>
+    <input id="pass" type="password" placeholder="Max 8 characters">
+  </div>
+<br>
+  <div class="box">
+    <label>Confirm Password</label>
+    <input id="cpass" type="password" placeholder="Confirm password">
+    <span class="eye-icon" onclick="togglePass()">👁️</span>
+  </div>
+<br>
+  <div class="box">
+    <label>Date of Birth</label>
+    <input id="dob" type="text" placeholder="DD-MM-YYYY">
+  </div>
+<br>
+  <div class="box">
+    <label>Gender</label>
+    <input name="gender" type="radio" value="Male"> Male
+    <input name="gender" type="radio" value="Female"> Female
+    <input name="gender" type="radio" value="Other"> Other
+  </div>
+  <div class="box">
+    <input id="terms" type="checkbox">
+    <label for="terms" style="display:inline;font-weight:normal;">I accept Terms & Conditions</label>
+  </div>
+  <div class="buttons">
+    <button type="submit" class="register">Register</button>
+    <button type="button" class="reset" onclick="document.getElementById('form').reset()">Reset</button>
+  </div>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  
+  function togglePass() {
+    const cpass = document.getElementById('cpass');
+    cpass.type = cpass.type === 'password' ? 'text' : 'password';
+  }
+
+
+  flatpickr("#dob", {
+    dateFormat: "d-m-Y",
+    allowInput: true,
+    defaultDate: null
+  });
+
+  
+  document.getElementById('form').onsubmit = function (e) {
+    e.preventDefault();
+
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const pass = document.getElementById('pass').value;
+    const cpass = document.getElementById('cpass').value;
+    const dob = document.getElementById('dob').value;
+    const terms = document.getElementById('terms').checked;
+    const gender = document.querySelector('input[name="gender"]:checked');
+
+    if (!fname || !lname || !email || !pass || !cpass || !dob || !gender || !terms) {
+      alert("Please fill all fields correctly.");
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      alert("Enter a valid email.");
+    } else if (pass.length > 8) {
+      alert("Password should not exceed 8 characters.");
+    } else if (pass !== cpass) {
+      alert("Passwords do not match.");
+    } else {
+      alert("Registration successful!");
+      this.reset();
+    }
+  };
+</script>    
+
+</body>
+</html>  
